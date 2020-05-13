@@ -67,7 +67,7 @@ public class RetrieveStockPrices {
                     try{
                         String url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
                                 +companyCode+
-                                "&apikey=Y1RF7S39YRS6CQR2&outputsize=compact";
+                                "&apikey=[apikey]&outputsize=compact";
                         System.out.println(url);
                         URL api = new URL(url);
                         HttpURLConnection connection =(HttpURLConnection) api.openConnection();
