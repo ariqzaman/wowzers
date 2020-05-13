@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/swipeToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".view.MainActivity"
+        tools:showIn="@layout/app_bar_main">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/stockIndexes_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="137dp"
+            tools:layout_editor_absoluteY="97dp" />
+
+
+    <ProgressBar
+        android:id="@+id/stockIndexProgress"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/stockIndexes_recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/stockIndexes_recyclerView"
+        app:layout_constraintVertical_bias="0.1" />
+
+</android.support.v4.widget.SwipeRefreshLayout>
