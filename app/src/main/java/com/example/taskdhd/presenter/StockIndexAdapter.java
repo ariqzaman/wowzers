@@ -28,7 +28,10 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class StockIndexAdapter
         extends RecyclerView.Adapter<StockIndexAdapter.stockIndexViewHolder> {
@@ -119,7 +122,11 @@ public class StockIndexAdapter
             }
         }catch (Exception ex){ex.printStackTrace();}
 
-        IndexAxisValueFormatter indexAxisValueFormatter = new IndexAxisValueFormatter(dateIndex);
+        List<String> list = Arrays.asList(dateIndex);
+        Collections.reverse(list);
+        String[] reversedArray = list.toArray(dateIndex);
+
+        IndexAxisValueFormatter indexAxisValueFormatter = new IndexAxisValueFormatter(reversedArray);
         xAxis.setValueFormatter(indexAxisValueFormatter);
         xAxis.setLabelCount(4);
 

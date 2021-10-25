@@ -65,9 +65,12 @@ public class RetrieveStockPrices {
                 boolean successful = false;
                 while(!successful){
                     try{
-                        String url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
-                                +companyCode+
-                                "&apikey=[apikey]&outputsize=compact";
+//                        String url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
+//                                +companyCode+
+//                                "&apikey=UXFCZEY0WC38WLF2&outputsize=compact";
+
+                        //String url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=DEMO&outputsize=compact";
+                        String url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=AAPL&interval=5min&apikey=UXFCZEY0WC38WLF2&outputsize=compact";
                         System.out.println(url);
                         URL api = new URL(url);
                         HttpURLConnection connection =(HttpURLConnection) api.openConnection();
@@ -93,7 +96,12 @@ public class RetrieveStockPrices {
 
                         JSONObject jsonObject = new JSONObject(result);
 
-                        if(jsonObject.has("Time Series (Daily)")) {
+//                        if(jsonObject.has("Time Series (Daily)")) {
+//                            internalStorage.saveStockPrices(companyCode, result);
+//                            companyArrayList.add(convertToCompany(jsonObject));
+//                            companies = new Companies(companyArrayList);
+//                            successful = true;
+                        if(jsonObject.has("Time Series (5min)")) {
                             internalStorage.saveStockPrices(companyCode, result);
                             companyArrayList.add(convertToCompany(jsonObject));
                             companies = new Companies(companyArrayList);
@@ -170,7 +178,8 @@ public class RetrieveStockPrices {
         Company company;
         ArrayList<DailyPrice> dailyPrices = new ArrayList<>();
         try {
-            JSONObject jsonPrices = jsonFile.getJSONObject("Time Series (Daily)");
+            //JSONObject jsonPrices = jsonFile.getJSONObject("Time Series (Daily)");
+            JSONObject jsonPrices = jsonFile.getJSONObject("Time Series (5min)");
             Iterator<String> dates = jsonPrices.keys();
 
             while (dates.hasNext()) {
