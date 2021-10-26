@@ -157,21 +157,6 @@ public class RetrieveStockPrices {
     }
 
 
-    public Company getStockPricesInternal(String companyCode){
-        Company company;
-        try {
-            JSONObject jsonObject = internalStorage.getStockPrice(companyCode);
-            if(jsonObject.has("warning")){
-                company = new Company("Data not saved", null);
-            }else{
-                company = convertToCompany(jsonObject);
-            }
-            return company;
-        }catch (Exception ex){
-            ex.printStackTrace();
-            return null;
-        }
-    }
 
 
     private Company convertToCompany(JSONObject jsonFile){

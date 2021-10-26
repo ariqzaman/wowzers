@@ -17,4 +17,6 @@
     <string name="title_activity_favourite">FavouriteActivity</string>
     <string name="title_activity_company">CompanyActivity</string>
     <string name="title_activity_notification">NotificationActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.taskdhd.view;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,14 +20,12 @@ import android.widget.ProgressBar;
 
 import com.example.taskdhd.R;
 import com.example.taskdhd.model.Company;
-import com.example.taskdhd.presenter.InternetConnectivity;
 import com.example.taskdhd.presenter.RetrieveStockPrices;
 import com.example.taskdhd.presenter.StockIndexAdapter;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     RetrieveStockPrices retrieveStockPrice;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -46,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     private class asyncLoad extends AsyncTask<String[], Integer, ArrayList<Company>> {
 
         String[] arrayIndex = {"^AXJO","^AFLI"};
-        InternetConnectivity internetConnectivity = new InternetConnectivity();
+
 
         @Override
         protected void onPreExecute() {
@@ -74,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected ArrayList<Company> doInBackground(String[]...indexes) {
             ArrayList<Company> arrayIndexes;
-            if(internetConnectivity.isNetworkAvailable(getApplicationContext())) {
+
                 arrayIndexes = retrieveStockPrice
                         .requestIndexesPriceOnline(arrayIndex)
                         .getListedCompanies();
@@ -86,11 +83,7 @@ public class MainActivity extends AppCompatActivity
                         break;
                     }
                 }
-            }else{
-                arrayIndexes = retrieveStockPrice
-                        .getIndexesPriceInternal(arrayIndex)
-                        .getListedCompanies();
-            }
+
 
             //System.out.println(arrayIndexes.get(0).getCompanySymbol());
             return arrayIndexes;
@@ -112,7 +105,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                new asyncLoad().execute();
+                //new asyncLoad().execute();
             }
         });
     }
@@ -128,7 +121,7 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -160,28 +153,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-            // Same page
-        } else if (id == R.id.nav_search) {
-            Intent intent = new Intent(this,SearchActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_favourite) {
-            Intent intent = new Intent(this,FavouriteActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_notification) {
-            Intent intent = new Intent(this,NotificationActivity.class);
-            startActivity(intent);
-        }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }
